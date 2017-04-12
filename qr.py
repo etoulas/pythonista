@@ -1,15 +1,11 @@
 import photos
-import qrtools.qrtools as qr
+import qrcode
+
+"""Create a QR code from an imgae"""
 
 img = photos.capture_image()
 
-if img: pass
-	#img.show()
-
-print(img)
-
-q = qr.QR()
-q.decode(img)
-
-print(q.data)
+if img:
+	qr = qrcode.make(img)
+	qr.show()
 
