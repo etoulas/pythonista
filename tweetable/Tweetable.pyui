@@ -1,0 +1,59 @@
+[
+  {
+    "selected" : false,
+    "frame" : "{{0, 0}, {320, 480}}",
+    "class" : "View",
+    "nodes" : [
+      {
+        "selected" : true,
+        "frame" : "{{6, 40}, {308, 434}}",
+        "class" : "TextView",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "uuid" : "9BCADDA1-7054-4A55-87FA-EE265629510A",
+          "flex" : "WH",
+          "corner_radius" : 5,
+          "frame" : "{{20, 20}, {200, 200}}",
+          "editable" : true,
+          "border_width" : 1,
+          "alignment" : "left",
+          "autocorrection_type" : "default",
+          "text" : "",
+          "font_name" : "<System>",
+          "spellchecking_type" : "default",
+          "class" : "TextView",
+          "name" : "tweet",
+          "font_size" : 17
+        }
+      },
+      {
+        "selected" : false,
+        "frame" : "{{164, 6}, {150, 32}}",
+        "class" : "Label",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "font_name" : "<System>",
+          "frame" : "{{45, 104}, {150, 32}}",
+          "uuid" : "2703FDF8-DEC5-4AAF-95CB-538F8DA962E7",
+          "class" : "Label",
+          "alignment" : "right",
+          "text" : "Label",
+          "font_size" : 18,
+          "name" : "length"
+        }
+      }
+    ],
+    "attributes" : {
+      "flex" : "",
+      "enabled" : true,
+      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
+      "name" : "Tweetable",
+      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)"
+    }
+  }
+]
