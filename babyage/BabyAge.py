@@ -4,6 +4,7 @@ from dateutil import rrule
 
 	
 def between_dates(rule, start_date, end_date):
+  """will always return a value >= 0"""
 	weeks = rrule.rrule(rule, dtstart=start_date, until=end_date)
 	return weeks.count()
 
@@ -28,9 +29,10 @@ def datepicker_action(sender):
 	years = between_dates(rrule.YEARLY, dob, NOW)
 	
 	v = sender.superview
-	v['weeks'].text = str(weeks) + '.'
-	v['months'].text = str(months) + '.'
-	v['years'].text = str(years) + '.'
+	nth = lambda s: str(s) + '.'
+	v['weeks'].text = nth(weeks)
+	v['months'].text = nth(months)
+	v['years'].text = nth(years)
 
 
 v = ui.load_view('BabyAge')
