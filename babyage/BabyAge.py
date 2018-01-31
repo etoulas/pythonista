@@ -7,22 +7,23 @@ from dateutil import rrule
 from enum import Enum
 from PIL import Image
 from PIL.ExifTags import TAGS
+from collections import OrderedDict, namedtuple
 
 
+# Customization: Add your names and birthdays here
+children = OrderedDict([  # https://pymotw.com/3/collections/ordereddict.html
+	('CHILD1', datetime.datetime(2017, 9, 8, 2, 44)),
+	('CHILD2', datetime.datetime(1982, 10, 22, 7, 20)),
+	('CHILD3', datetime.datetime(1986, 6, 9, 2, 42)),
+])
+# Alternative use a namedtuple
+Child = namedtuple('Child', 'name dob')  # https://pymotw.com/3/collections/namedtuple.html
+children2 = (
+	Child(name='CHILD1', dob=datetime.datetime(2017, 9, 8, 2, 44)),
+	Child(name='CHILD2', dob=datetime.datetime(1982, 10, 22, 7, 20)),
+	Child(name='CHILD3', dob=datetime.datetime(1986, 6, 9, 2, 42)),
+)
 
-# Customization: Add your names here
-class Names(Enum):
-	CHILD1 = 'CHILD1'
-	CHILD2 = 'CHILD2'
-	CHILD3 = 'CHILD3'
-	
-	
-# Customization: Add your birthdays here
-class Birthdays(Enum):
-	CHILD1 = datetime.datetime(2017, 9, 8, 2, 44)
-	CHILD2 = datetime.datetime(1982, 10, 22, 7, 20)
-	CHILD3 = datetime.datetime(1986, 6, 9, 2, 42)
-	
 
 class Contexts(Enum):
 	TODAY = 'Today'
@@ -30,7 +31,7 @@ class Contexts(Enum):
 
 	
 class BabyAge:
-	CHILDREN = dict([(Names.CHILD1.value, Birthdays.CHILD1.value), (Names.CHILD2.value, Birthdays.CHILD2.value), (Names.CHILD3.value, Birthdays.CHILD3.value)])
+	CHILDREN = children
 	
 	# Initialization
 	def __init__(self, name, dob):
@@ -47,21 +48,19 @@ class BabyAge:
 		
 		# Bind actions to class methods
 		self._ui['button_pick_image'].action = self.button_pick_image_action
-		self._ui['button_child1'].action = self.button_child1_action
-		self._ui['button_child2'].action = self.button_child2_action
-		self._ui['button_child3'].action = self.button_child3_action
+		self._ui['button_child1'].action = self.button_childX_action(0)  # returns a function
+		self._ui['button_child2'].action = self.button_childX_action(1)
+		self._ui['button_child3'].action = self.button_childX_action(2)
 		self._ui['datepicker_now'].action = self.datepicker_now_action
 		self._ui['datepicker_dob'].action = self.datepicker_dob_action
 		self._ui['seg_cntrl_now'].action = self.seg_cntrl_now_action
 
 		# Set button caption
-		for key, value in self.CHILDREN.items():
-			if key == Names.CHILD1.value:
-				self._ui['button_child1'].title = str(key)
-			elif key == Names.CHILD2.value:
-				self._ui['button_child2'].title = str(key)
-			elif key == Names.CHILD3.value:
-				self._ui['button_child3'].title = str(key)
+		for i, item in enumerate(self.CHILDREN.items(), start=1):
+			# enumerate counts for you :)
+			button = 'button_child' + i
+			# OrderedDict removes explicit check for key
+			self._ui[button].title = str(item[0])
 		
 		self._ui['text_name'].enabled = False
 		self._ui['text_name'].text = self._name
@@ -125,21 +124,16 @@ class BabyAge:
 	def button_pick_image_action(self, sender):
 		self.pick_image_action(sender)
 
-	def button_child1_action(self, sender):
-		self._name = Names.CHILD1.value
-		self._dob = Birthdays.CHILD1.value
-		self._button_action(sender)
-		
-	def button_child2_action(self, sender):
-		self._name = Names.CHILD2.value
-		self._dob = Birthdays.CHILD2.value
-		self._button_action(sender)
-		
-	def button_child3_action(self, sender):
-		self._name = Names.CHILD3.value
-		self._dob = Birthdays.CHILD3.value
-		self._button_action(sender)
-		
+	def button_childX_action(self, x):
+		# index access is reliable on the OrderedDict
+		# (this is a closure)
+		def childX_action(sender):
+			self._name = list(self.CHILDREN.keys())[x]
+			self._dob = list(self.CHILDREN.values())[x]
+			self._button_action(sender)
+		# we return the function reference
+		return childX_action
+
 	def seg_cntrl_now_action(self, sender):
 		if sender.selected_index <= 0:
 			self._now = datetime.datetime.now()
@@ -307,7 +301,8 @@ def get_exif(fn):
 	
 	
 def main():
-	babyage = BabyAge(Names.CHILD1.value, Birthdays.CHILD1.value)
+	# get the first item from the dictionary and unpack it
+	babyage = BabyAge(*list(children.items())[0])
 	babyage.run()
 	
 	
