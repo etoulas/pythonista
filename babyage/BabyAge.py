@@ -243,44 +243,27 @@ class BabyAge:
 		
 
 class NoEXIFDataError(Exception):
-    """Exception raised when there is no image EXIF data found.
+	"""Exception raised when there is no image EXIF data found.
 
-    Attributes:
-        expr -- input expression in which the error occurred
-        msg  -- explanation of the error
-    """
+	Attributes:
+		expr -- input expression in which the error occurred
+		msg  -- explanation of the error
+	"""
 
-    def __init__(self, expr, msg):
-        self.expr = expr
-        self.msg = msg
+	def __init__(self, expr, msg):
+		self.expr = expr
+		self.msg = msg
+
 
 # Avoid warnings due to dynamic binding
-def datepicker_now_action(sender):
-	pass
-	
-def datepicker_dob_action(sender):
-	pass
-
-def button_pick_image_action(sender):
-	pass
-	
-def button_child1_action(sender):
-	pass
-	
-def button_child2_action(sender):
-	pass
-	
-	
-def button_child3_action(sender):
-	pass
-	
-	
-def pick_image_action(sender):
-	pass
-	
-	
-def seg_cntrl_now_action(sender):
-	pass
+def datepicker_now_action(sender): pass
+def datepicker_dob_action(sender): pass
+def button_pick_image_action(sender): pass
+def button_child1_action(sender): pass
+def button_child2_action(sender): pass
+def button_child3_action(sender): pass
+def pick_image_action(sender): pass
+def seg_cntrl_now_action(sender): pass
 	
 
 # Date Delta Calculation
