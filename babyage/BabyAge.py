@@ -58,7 +58,7 @@ class BabyAge:
 		# Set button caption
 		for i, item in enumerate(self.CHILDREN.items(), start=1):
 			# enumerate counts for you :)
-			button = 'button_child' + i
+			button = 'button_child' + str(i)
 			# OrderedDict removes explicit check for key
 			self._ui[button].title = str(item[0])
 		
