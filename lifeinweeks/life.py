@@ -13,7 +13,7 @@ from dateutil import rrule
 
 
 NUM_WEEKS = 52
-NUM_YEARS = 30
+NUM_YEARS = 36
 DB_FILE = 'data/storage.db'
 
 
@@ -22,13 +22,20 @@ class LifeView(ui.View):
   
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
+    # dynamic button dimensions for screen
     self.BTN_SIZE = self.width / NUM_WEEKS
-    self.settings = self.load('settings')
+    
+    settings = self.load('settings')
+    if not settings:
+      settings = {}
+      settings['name'] = ''
+      settings['dob'] = datetime.datetime.today()
+    self.settings = settings
     
     self.main_view = self.create_main_view()
     self.navi_view = self.create_navi_view()
     self.personalize(self.settings)
-    self.init_weeks(NUM_WEEKS, NUM_YEARS)
+    self.init_weeks()
   
   def create_main_view(self):
     scroll = ui.ScrollView()
@@ -90,13 +97,13 @@ class LifeView(ui.View):
           'type': 'text',
           'title': 'Name',
           'key': 'name',
-          'value': self.settings.get('name', ''),
+          'value': self.settings['name'],
         },
         {
           'type': 'date',
           'title': 'Date of birth',
           'key': 'dob',
-          'value': self.settings.get('dob', datetime.datetime.today()),
+          'value': self.settings['dob'],
         }
       ]
     )
@@ -105,6 +112,8 @@ class LifeView(ui.View):
       self.save('settings', settings)
       self.settings = settings
       self.personalize(self.settings)
+      #TODO
+      #self.update_weeks()
       dialogs.hud_alert('Saved')
   
   def save(self, key, data):
@@ -113,7 +122,7 @@ class LifeView(ui.View):
   
   def load(self, key):
     with shelve.open(DB_FILE) as db:
-      data = db.get(key, dict())
+      data = db.get(key, None)
     return data
   
   def create_navi_view(self):
@@ -124,8 +133,9 @@ class LifeView(ui.View):
     return nv
   
   @ui.in_background
-  def init_weeks(self, weeks, years):
-    dob = self.settings['dob']
+  def init_weeks(self, weeks=NUM_WEEKS, years=NUM_YEARS):
+    today = datetime.datetime.today()
+    dob = self.settings.get('dob', today)
     curr_week = datetime.datetime.today()
     past_weeks = delta_between_dates(
       rrule.WEEKLY, dob, curr_week)
@@ -157,7 +167,7 @@ class LifeView(ui.View):
       v = ui.load_view('lifeweek')
       v.name = 'Week {}'.format(week + NUM_WEEKS * year)
       txt = 'week {}, year {}'.format(week, year)
-      week_start = self.settings.get('dob', None)
+      week_start = self.settings['dob']
       
       v['lbl_weekyear'].text = txt
       v['lbl_date'].text = week_start.strftime("%d.%m.%Y")
