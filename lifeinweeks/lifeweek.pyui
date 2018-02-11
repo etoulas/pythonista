@@ -1,0 +1,166 @@
+[
+  {
+    "nodes" : [
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{78, 70}, {188, 48}}",
+        "class" : "Label",
+        "attributes" : {
+          "uuid" : "264EFAC8-676E-452F-8060-87C73DE69404",
+          "font_size" : 24,
+          "corner_radius" : 1,
+          "frame" : "{{85, 224}, {150, 32}}",
+          "border_color" : "RGBA(0.784644,0.784644,0.784644,1.000000)",
+          "border_width" : 1,
+          "alignment" : "center",
+          "text" : "Week, Year",
+          "font_name" : "<System>",
+          "class" : "Label",
+          "name" : "lbl_weekyear",
+          "flex" : "WLR"
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{18, 70}, {52, 48}}",
+        "class" : "Button",
+        "attributes" : {
+          "flex" : "R",
+          "frame" : "{{120, 224}, {80, 32}}",
+          "title" : "◀️",
+          "uuid" : "71490565-0179-4BDB-8C68-79F843C276D8",
+          "class" : "Button",
+          "name" : "btn_wprev",
+          "font_size" : 48
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{268, 70}, {52, 48}}",
+        "class" : "Button",
+        "attributes" : {
+          "flex" : "L",
+          "frame" : "{{120, 224}, {80, 32}}",
+          "title" : "▶️",
+          "uuid" : "B74D4497-3C7A-4AAB-9FC6-D35058042A1F",
+          "class" : "Button",
+          "name" : "btn_wnext",
+          "font_size" : 48
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{143, 14}, {52, 48}}",
+        "class" : "Button",
+        "attributes" : {
+          "flex" : "LR",
+          "frame" : "{{120, 224}, {80, 32}}",
+          "title" : "🔼",
+          "uuid" : "2CD7AECD-9DE2-4B74-AC0C-71E5C521E2C8",
+          "class" : "Button",
+          "name" : "btn_yprev",
+          "font_size" : 48
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{143, 126}, {52, 48}}",
+        "class" : "Button",
+        "attributes" : {
+          "flex" : "LR",
+          "frame" : "{{120, 224}, {80, 32}}",
+          "title" : "🔽",
+          "uuid" : "966E36D8-8D75-40FD-82C8-650CF00E34B9",
+          "class" : "Button",
+          "name" : "btn_ynext",
+          "font_size" : 48
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{21, 231}, {274, 234}}",
+        "class" : "TextView",
+        "attributes" : {
+          "uuid" : "F5E5E357-34BB-4787-A4CE-55525B794964",
+          "font_size" : 17,
+          "corner_radius" : 1,
+          "frame" : "{{60, 140}, {200, 200}}",
+          "border_color" : "RGBA(0.810861,0.810861,0.810861,1.000000)",
+          "editable" : true,
+          "border_width" : 1,
+          "alignment" : "left",
+          "autocorrection_type" : "default",
+          "font_name" : "<System>",
+          "spellchecking_type" : "default",
+          "class" : "TextView",
+          "name" : "txv_detail",
+          "flex" : "WH"
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{21, 191}, {122, 32}}",
+        "class" : "Label",
+        "attributes" : {
+          "name" : "lbl_details",
+          "frame" : "{{85, 224}, {150, 32}}",
+          "uuid" : "C246DDC9-16FF-4DEE-B592-E396B82756FF",
+          "class" : "Label",
+          "alignment" : "left",
+          "text" : "Memories",
+          "font_size" : 18,
+          "font_name" : "<System>"
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{151, 191}, {150, 32}}",
+        "class" : "Label",
+        "attributes" : {
+          "name" : "lbl_date",
+          "frame" : "{{85, 224}, {150, 32}}",
+          "uuid" : "059DC0F1-6DA5-41E1-8705-CB6263616E06",
+          "class" : "Label",
+          "alignment" : "left",
+          "text" : "05.02.2018",
+          "font_size" : 18,
+          "font_name" : "<System>"
+        },
+        "selected" : true
+      }
+    ],
+    "frame" : "{{0, 0}, {320, 480}}",
+    "class" : "View",
+    "attributes" : {
+      "enabled" : true,
+      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
+      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
+      "flex" : ""
+    },
+    "selected" : false
+  }
+]
