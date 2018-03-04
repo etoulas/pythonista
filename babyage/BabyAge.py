@@ -3,12 +3,12 @@ import datetime
 import clipboard
 import appex
 import photos
+from math import floor
 from dateutil import rrule
 from enum import Enum
 from PIL import Image
 from PIL.ExifTags import TAGS
 from collections import OrderedDict, namedtuple
-
 
 # Customization: Add your names and birthdays here
 children = OrderedDict([  # https://pymotw.com/3/collections/ordereddict.html
@@ -54,6 +54,7 @@ class BabyAge:
 		self._ui['datepicker_now'].action = self.datepicker_now_action
 		self._ui['datepicker_dob'].action = self.datepicker_dob_action
 		self._ui['seg_cntrl_now'].action = self.seg_cntrl_now_action
+		self._ui['slider_weeks'].action = self.slider_weeks_action
 
 		# Set button caption
 		for i, item in enumerate(self.CHILDREN.items(), start=1):
@@ -64,26 +65,36 @@ class BabyAge:
 		
 		self._ui['text_name'].enabled = False
 		self._ui['text_name'].text = self._name
-		self._ui_set_context(Contexts.TODAY.value, freeze=True)	
+		self._ui_set_context(Contexts.TODAY.value, freeze=True)
+		self._ui['slider_weeks'].continuous = True
 		
 	def _ui_refresh(self):
-		self._ui['label_age'].text = 'Week: ' + str(self._weeks) +', Month: ' + str(self._months) + ', Year: ' + str(self._years)
-		self._ui['datepicker_dob'].date = self._dob
+		det_txt = lambda x,y: self._strdate(x) + ' - ' + y
+		age_txt = lambda w,m,y: 'W:' + str(w) + ', M:' + str(m) + ', Y: ' + str(y)
+
 		self._ui['text_name'].text = self._name
-		
+		self._ui['datepicker_dob'].date = self._dob
+		self._ui['label_dob_detail'].text = det_txt(self._dob, self._name)
+
+		# Check Segment Control: Age Today (0) / Age at Image (1)
 		if self._ui['seg_cntrl_now'].selected_index <= 0:
-			self._ui['label_now_detail'].text = 'Now'
+			self._ui['label_now_detail'].text = det_txt(self._now, 'TODAY')
 		else:
-			self._ui['label_now_detail'].text = 'Image'
-		self._ui['label_dob_detail'].text = self._name
+			self._ui['label_now_detail'].text = det_txt(self._now, 'IMAGE')
 		
+		# Check if an image is currently set
 		if self._now == self._now_img:
 			self._ui['datepicker_now'].date = self._now_img
-			self._ui['label_now_detail'].text = 'Image: ' + self._strdate(self._now_img)
+			self._ui['label_now_detail'].text = det_txt(self._now_img, 'IMAGE')
 		else:
 			self._ui['datepicker_now'].date = self._now
 			if self._now.date() != datetime.datetime.now().date():
-				self._ui['label_now_detail'].text = 'Custom'
+				self._ui['label_now_detail'].text = det_txt(self._now, 'CUSTOM')
+
+		# Set output texts in the UI
+		self._ui['label_age'].text = age_txt(self._weeks, self._months, self._years)
+		self._ui_set_current_week(self._weeks, refresh=True)
+
 			
 	def _ui_set_context(self, context, freeze=False):
 		self._context = context
@@ -94,6 +105,17 @@ class BabyAge:
 		enabled = not freeze
 		self._ui['seg_cntrl_now'].enabled = enabled
 		self._ui['seg_cntrl_now'].selected_index = idx
+
+	def _ui_set_current_week(self, week, refresh=False):
+			week_txt = lambda x,y,z: 'W:' + str(x) + ' ' + str(y) + '-' + str(z)
+
+			if refresh == True:
+				self._ui['slider_weeks'].value = 1
+			delta_weeks = datetime.timedelta(weeks=week-1)
+			delta_days = datetime.timedelta(days=6)
+			sow = self._dob + delta_weeks
+			eow = sow + delta_days			
+			self._ui['label_week'].text = week_txt(week, self._strdate(sow), self._strdate(eow))
 
 	# Run App 
 	def run(self):
@@ -144,6 +166,11 @@ class BabyAge:
 			if self._now_img:
 				self._now = self._now_img
 		self._calc()
+
+	def slider_weeks_action(self, sender):
+		self._ui = sender.superview
+		week = floor(sender.value * self._weeks)
+		self._ui_set_current_week(week)
 		
 	def pick_image_action(self, sender):
 		albums = photos.get_smart_albums()
@@ -228,8 +255,8 @@ class BabyAge:
 			
 	# Utilities
 	def _strdate(self, date):
-		return date.strftime('%d.%m.%Y %H:%M')
-		
+		return date.strftime('%a, %d.%m.%y')
+				
 	def _debug(self, msg, value):
 		print('DEBUG: ' + msg + ' => ' + value)
 		
@@ -264,7 +291,7 @@ def button_child2_action(sender): pass
 def button_child3_action(sender): pass
 def pick_image_action(sender): pass
 def seg_cntrl_now_action(sender): pass
-	
+def slider_weeks_action(sender): pass
 
 # Date Delta Calculation
 def between_dates(rule, start_date, end_date):

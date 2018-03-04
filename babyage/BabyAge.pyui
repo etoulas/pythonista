@@ -64,7 +64,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{249, 83}, {104, 32}}",
+        "frame" : "{{249, 43}, {104, 32}}",
         "class" : "Button",
         "attributes" : {
           "border_width" : 1,
@@ -85,18 +85,18 @@
         "nodes" : [
 
         ],
-        "frame" : "{{6, 540}, {347, 70}}",
+        "frame" : "{{7, 532}, {347, 70}}",
         "class" : "Label",
         "attributes" : {
           "font_size" : 17,
-          "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+          "number_of_lines" : 3,
           "frame" : "{{90, 221}, {150, 32}}",
           "tint_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
-          "uuid" : "78A44C30-9638-4AD0-BE32-22EBAE8354B0",
-          "number_of_lines" : 3,
           "class" : "Label",
-          "alignment" : "left",
+          "uuid" : "78A44C30-9638-4AD0-BE32-22EBAE8354B0",
           "text" : "",
+          "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+          "alignment" : "left",
           "name" : "label_msg",
           "font_name" : "<System>"
         },
@@ -127,26 +127,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{6, 6}, {165, 32}}",
-        "class" : "Label",
-        "attributes" : {
-          "font_size" : 18,
-          "text_color" : "RGBA(0.682353,0.180392,0.180392,1.000000)",
-          "frame" : "{{90, 221}, {150, 32}}",
-          "uuid" : "75586663-FB8E-47E3-BA92-FBFC6C350C13",
-          "class" : "Label",
-          "alignment" : "left",
-          "text" : "Calculated age for:",
-          "name" : "label_header",
-          "font_name" : "<System-Bold>"
-        },
-        "selected" : false
-      },
-      {
-        "nodes" : [
-
-        ],
-        "frame" : "{{253, 171}, {112, 135}}",
+        "frame" : "{{254, 123}, {112, 124}}",
         "class" : "ImageView",
         "attributes" : {
           "border_width" : 1,
@@ -164,7 +145,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{113, 131}, {241, 32}}",
+        "frame" : "{{114, 83}, {241, 32}}",
         "class" : "Label",
         "attributes" : {
           "name" : "label_now_detail",
@@ -183,7 +164,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{6, 83}, {238, 32}}",
+        "frame" : "{{6, 43}, {238, 32}}",
         "class" : "SegmentedControl",
         "attributes" : {
           "action" : "seg_cntrl_now_action",
@@ -200,13 +181,13 @@
         "nodes" : [
 
         ],
-        "frame" : "{{6, 171}, {239, 135}}",
+        "frame" : "{{7, 123}, {239, 135}}",
         "class" : "DatePicker",
         "attributes" : {
-          "class" : "DatePicker",
+          "name" : "datepicker_now",
           "frame" : "{{18, 196}, {320, 216}}",
           "action" : "datepicker_now_action",
-          "name" : "datepicker_now",
+          "class" : "DatePicker",
           "mode" : 2,
           "uuid" : "62507FA3-9932-42AD-86A3-9A260903A90F"
         },
@@ -216,7 +197,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{6, 43}, {336, 32}}",
+        "frame" : "{{134, 0}, {219, 35}}",
         "class" : "Label",
         "attributes" : {
           "font_size" : 18,
@@ -225,7 +206,7 @@
           "uuid" : "939D3375-2109-4908-B4E6-9873571F04A4",
           "class" : "Label",
           "alignment" : "left",
-          "text" : "Week: X, Month: Y, Year Z",
+          "text" : "<Age>",
           "name" : "label_age",
           "font_name" : "<System-Bold>"
         },
@@ -235,7 +216,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{179, 6}, {120, 32}}",
+        "frame" : "{{6, 3}, {120, 32}}",
         "class" : "TextField",
         "attributes" : {
           "name" : "text_name",
@@ -250,13 +231,13 @@
           "font_size" : 17,
           "font_name" : "<System-Bold>"
         },
-        "selected" : true
+        "selected" : false
       },
       {
         "nodes" : [
 
         ],
-        "frame" : "{{6, 131}, {99, 32}}",
+        "frame" : "{{7, 83}, {99, 32}}",
         "class" : "Label",
         "attributes" : {
           "font_size" : 18,
@@ -308,16 +289,52 @@
           "font_name" : "<System>"
         },
         "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{0, 295}, {365, 34}}",
+        "class" : "Slider",
+        "attributes" : {
+          "action" : "slider_weeks_action",
+          "flex" : "W",
+          "frame" : "{{86, 288}, {200, 34}}",
+          "uuid" : "FBD6FD33-F059-4EC0-B0CB-3ABFDF60D689",
+          "class" : "Slider",
+          "value" : 1,
+          "name" : "slider_weeks"
+        },
+        "selected" : true
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{7, 255}, {364, 32}}",
+        "class" : "Label",
+        "attributes" : {
+          "name" : "label_week",
+          "text_color" : "RGBA(0.682353,0.180392,0.180392,1.000000)",
+          "frame" : "{{111, 289}, {150, 32}}",
+          "uuid" : "C7592041-A44D-462D-BCF6-D73C8B0D441E",
+          "class" : "Label",
+          "alignment" : "left",
+          "text" : "<Week>",
+          "font_size" : 18,
+          "font_name" : "<System-Bold>"
+        },
+        "selected" : false
       }
     ],
     "frame" : "{{0, 0}, {371, 610}}",
     "class" : "View",
     "attributes" : {
-      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
-      "enabled" : true,
       "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
-      "name" : "Baby Age Calculator",
+      "enabled" : true,
       "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
+      "name" : "Baby Age Calculator",
       "flex" : ""
     },
     "selected" : false
